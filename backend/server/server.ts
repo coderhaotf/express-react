@@ -9,6 +9,7 @@ import { authenticate, sync } from "./setup";
 // 注册业务表, 全局导入
 import "./model";
 import { routes } from "./routes";
+import { clientErrorHandler, errorHandler } from "./middleware";
 
 // 配置环境变量
 dotenv.config();
@@ -30,7 +31,7 @@ server.use(
       maxAge: 7 * 24 * 60 * 60 * 1000,
       domain: dev ? "localhost" : process.env.COOKIE_DOMAIN,
       secure: !dev,
-    } as any,
+    },
   })
 );
 
@@ -41,6 +42,10 @@ server.use(cors());
 server.use(express.json());
 
 server.use(express.static(path.join(process.cwd(), "public")));
+
+server.use(clientErrorHandler);
+
+server.use(errorHandler);
 
 // 注册路由
 routes(server);
