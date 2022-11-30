@@ -45,9 +45,10 @@ server.use(express.static(path.join(process.cwd(), "public")));
 // 注册路由
 routes(server);
 
-// server.get("*", (_, res) => {
-//   res.sendStatus(403);
-// });
+server.get("*", (_, res) => {
+  res.statusCode = 403;
+  res.send("此路由没有权限!");
+});
 
 const httpServer = http.createServer(server);
 httpServer.listen(port, () => {
