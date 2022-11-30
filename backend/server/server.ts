@@ -5,11 +5,12 @@ import http from "http";
 import compression from "compression";
 import dotenv from "dotenv";
 import path from "path";
-import { authenticate, sync } from "./setup";
+import { authenticate, sequelize, sync } from "./setup";
 // 注册业务表, 全局导入
 import "./model";
 import { routes } from "./routes";
 import { clientErrorHandler, errorHandler } from "./middleware";
+import { createTerminus, HealthCheck } from "@godaddy/terminus";
 
 // 配置环境变量
 dotenv.config();
@@ -59,4 +60,28 @@ const httpServer = http.createServer(server);
 httpServer.listen(port, () => {
   console.log("server start at port: ", port);
   authenticate().then(sync);
+});
+
+// start cleanup of resource, like databases or file descriptors
+async function onSignal() {
+  console.log("server is starting cleanup");
+  if (sequelize) {
+    sequelize.close().catch((reason) => {
+      console.error(reason);
+    });
+  }
+}
+
+const onHealthCheck: HealthCheck = async ({ state }) => {
+  // checks if the system is healthy, like the db connection is live
+  // resolves, if health, rejects if not
+  if (state && state.isShuttingDown) {
+    // do something
+  }
+};
+
+createTerminus(httpServer, {
+  signal: "SIGINT",
+  healthChecks: { "/healthcheck": onHealthCheck },
+  onSignal,
 });

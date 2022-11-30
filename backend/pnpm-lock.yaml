@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@godaddy/terminus': ^4.11.2
   '@types/compression': ^1.7.2
   '@types/cors': ^2.8.12
   '@types/express': ^4.17.14
@@ -36,6 +37,7 @@ dependencies:
   socket.io: registry.npmmirror.com/socket.io/4.5.4
 
 devDependencies:
+  '@godaddy/terminus': 4.11.2
   '@types/compression': registry.npmmirror.com/@types/compression/1.7.2
   '@types/cors': registry.npmmirror.com/@types/cors/2.8.12
   '@types/express': registry.npmmirror.com/@types/express/4.17.14
@@ -55,6 +57,29 @@ devDependencies:
   typescript: registry.npmmirror.com/typescript/4.9.3
 
 packages:
+
+  /@godaddy/terminus/4.11.2:
+    resolution: {integrity: sha512-e/kbOWpGKME42eltM/wXM3RxSUOrfureZxEd6Dt6NXyFoJ7E8lnmm7znXydJsL3B7ky4HRFZI+eHrep54NZbeQ==}
+    dependencies:
+      stoppable: r2.cnpmjs.org/stoppable/1.1.0
+    dev: true
+
+  r2.cnpmjs.org/fsevents/2.3.2:
+    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/fsevents/-/fsevents-2.3.2.tgz}
+    name: fsevents
+    version: 2.3.2
+    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
+    os: [darwin]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  r2.cnpmjs.org/stoppable/1.1.0:
+    resolution: {integrity: sha512-KXDYZ9dszj6bzvnEMRYvxgeTHU74QBFL54XKtP3nyMuJ81CFYtABZ3bAzL2EdFUaEwJOBOgENyFj3R7oTzDyyw==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/stoppable/-/stoppable-1.1.0.tgz}
+    name: stoppable
+    version: 1.1.0
+    engines: {node: '>=4', npm: '>=6'}
+    dev: true
 
   registry.npmmirror.com/@ampproject/remapping/2.2.0:
     resolution: {integrity: sha512-qRmjj8nj9qmLTQXXmaR1cck3UXSRMPrbsLJAasZpF+t3riI71BXed5ebIOYwQntykeZuhjsdweEc9BxH5Jc26w==, registry: http://npmreg.gzdevops.tsintergy.com/, tarball: https://registry.npmmirror.com/@ampproject/remapping/-/remapping-2.2.0.tgz}
@@ -1722,7 +1747,7 @@ packages:
       normalize-path: registry.npmmirror.com/normalize-path/3.0.0
       readdirp: registry.npmmirror.com/readdirp/3.6.0
     optionalDependencies:
-      fsevents: registry.npmmirror.com/fsevents/2.3.2
+      fsevents: r2.cnpmjs.org/fsevents/2.3.2
     dev: true
 
   registry.npmmirror.com/ci-info/3.7.0:
@@ -2568,16 +2593,6 @@ packages:
     version: 1.0.0
     dev: true
 
-  registry.npmmirror.com/fsevents/2.3.2:
-    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==, registry: http://npmreg.gzdevops.tsintergy.com/, tarball: https://registry.npmmirror.com/fsevents/-/fsevents-2.3.2.tgz}
-    name: fsevents
-    version: 2.3.2
-    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
-    os: [darwin]
-    requiresBuild: true
-    dev: true
-    optional: true
-
   registry.npmmirror.com/function-bind/1.1.1:
     resolution: {integrity: sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==, registry: http://npmreg.gzdevops.tsintergy.com/, tarball: https://registry.npmmirror.com/function-bind/-/function-bind-1.1.1.tgz}
     name: function-bind
@@ -3172,7 +3187,7 @@ packages:
       micromatch: registry.npmmirror.com/micromatch/4.0.5
       walker: registry.npmmirror.com/walker/1.0.8
     optionalDependencies:
-      fsevents: registry.npmmirror.com/fsevents/2.3.2
+      fsevents: r2.cnpmjs.org/fsevents/2.3.2
     dev: true
 
   registry.npmmirror.com/jest-leak-detector/29.3.1:
