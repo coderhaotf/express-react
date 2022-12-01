@@ -1,7 +1,7 @@
 import express, { NextFunction, Request, Response } from "express";
-
 import { userRouter } from "./user.controller";
 import { orderRouter } from "./order.controller";
+import { ResponseGenerator } from "../utils";
 
 function handleError(
   err: Error,
@@ -10,7 +10,9 @@ function handleError(
   next: NextFunction
 ) {
   console.error(err.stack);
-  res.json({ error: err.message || err.toString() });
+  res.json(
+    ResponseGenerator.success({ message: err.message || err.toString() })
+  );
 }
 
 export function routes(server: express.Express) {
