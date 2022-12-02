@@ -2,7 +2,7 @@ import { sequelize } from "../setup";
 import { DataTypes, Model } from "sequelize";
 
 export const userModel = sequelize.define<
-  Model<{ id: string; name: string; age: number }>
+  Model<{ id?: string; name: string; password: string; age?: number }>
 >("user", {
   id: {
     allowNull: false,
@@ -15,8 +15,12 @@ export const userModel = sequelize.define<
     unique: true,
     type: DataTypes.STRING,
   },
-  age: {
+  password: {
     allowNull: false,
+    type: DataTypes.STRING,
+  },
+  age: {
+    allowNull: true,
     type: DataTypes.INTEGER,
   },
 });

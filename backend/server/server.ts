@@ -9,7 +9,6 @@ import { authenticate, sequelize, sync } from "./setup";
 // 注册业务表, 全局导入
 import "./model";
 import { routes } from "./routes";
-import { clientErrorHandler, errorHandler } from "./middleware";
 import { createTerminus, HealthCheck } from "@godaddy/terminus";
 
 // 配置环境变量
@@ -44,14 +43,10 @@ server.use(express.json());
 
 server.use(express.static(path.join(process.cwd(), "public")));
 
-server.use(clientErrorHandler);
-
-server.use(errorHandler);
-
 // 注册路由
 routes(server);
 
-server.get("*", (_, res) => {
+server.all("*", (_, res) => {
   res.statusCode = 403;
   res.send("此路由没有权限!");
 });
@@ -59,6 +54,7 @@ server.get("*", (_, res) => {
 const httpServer = http.createServer(server);
 httpServer.listen(port, () => {
   console.log("server start at port: ", port);
+  // sync database
   authenticate().then(sync);
 });
 

@@ -1,4 +1,8 @@
-import type { AxiosRequestConfig, AxiosResponseHeaders } from "axios";
+import type {
+  AxiosRequestConfig,
+  AxiosResponseHeaders,
+  AxiosRequestHeaders,
+} from "axios";
 import axios from "axios";
 
 export interface ResponseType<T = any> {
@@ -35,6 +39,14 @@ let defaultConfig: AxiosRequestConfig = {
       return data;
     },
   ],
+  transformRequest: (data: any, headers: AxiosRequestHeaders) => {
+    const auth_token = localStorage.getItem("auth_token");
+    if (auth_token) {
+      headers.set("Authorization", `Bearer ${auth_token}`);
+      headers.setContentType("application/json");
+    }
+    return JSON.stringify(data);
+  },
 };
 
 const setRequestConfig = (config: AxiosRequestConfig = {}) => {

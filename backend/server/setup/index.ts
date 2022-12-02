@@ -31,7 +31,6 @@ const authenticate = () =>
 
 const sync = () =>
   sequelize.showAllSchemas({ logging: false }).then((tables) => {
-    if (tables.length > 0) return Promise.resolve();
     return sequelize
       .sync()
       .then(() => {

@@ -2,31 +2,30 @@ import React, { useState } from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input, message, Space } from "antd";
 import styles from "./index.module.less";
-import { loginApi } from "../../services";
+import { registerApi } from "../../services";
 import { useNavigate } from "react-router-dom";
 
-const Login: React.FC = () => {
+const Register: React.FC = () => {
   const navigate = useNavigate();
   const [loading, setloading] = useState(false);
 
   const onFinish = (values: { username: string; password: string }) => {
     setloading(true);
-    loginApi(values)
+    registerApi(values)
       .then((data) => {
         if (data.success) {
-          localStorage.setItem("auth_token", data.data.auth.token);
-          message.success(data.message || "登录成功!", 1, () => {
+          message.success(data.message || "注册成功!", 1, () => {
             navigate("/", { replace: true });
           });
         } else {
-          message.warning(data.message || "登录异常!");
+          message.warning(data.message || "注册异常!");
         }
       })
       .catch((error) => {
         if (error instanceof Error) {
           message.error(error.message);
         } else {
-          message.error(new String(error || "登录报错!").toString());
+          message.error(new String(error || "注册报错!").toString());
         }
       })
       .finally(() => {
@@ -63,7 +62,7 @@ const Login: React.FC = () => {
             htmlType="submit"
             className="login-form-button"
           >
-            Login
+            Sign Up
           </Button>
         </Form.Item>
         <div>
@@ -71,8 +70,8 @@ const Login: React.FC = () => {
             <Button type={"link"} onClick={() => navigate("/")}>
               Back
             </Button>
-            <Button type={"link"} onClick={() => navigate("/register")}>
-              Register
+            <Button type={"link"} onClick={() => navigate("/login")}>
+              Login
             </Button>
           </Space>
         </div>
@@ -81,4 +80,4 @@ const Login: React.FC = () => {
   );
 };
 
-export { Login };
+export { Register };

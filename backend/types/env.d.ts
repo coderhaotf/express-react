@@ -14,6 +14,8 @@ declare global {
         protocol?: string;
         database?: string;
       };
+      jwt_secret_key: string;
+      jwt_expired: number;
     }
   }
 }
