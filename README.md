@@ -1,3 +1,44 @@
+## Node Full Stack Framework
+
+### install
+
+```bash
+// install pnpm
+npm install -g pnpm
+
+// install project dependency
+pnpm install
+```
+
+### backend
+
+- express
+- sequelize
+- socket.io
+- mysql2
+- jsonwebtoken(jwt)
+- ...
+
+### fontend
+
+- react
+- antd
+- react-redux
+- @reduxjs/toolkit
+- socket.io-client
+- vite
+- less
+- axios
+- typescript
+- ...
+
+### other
+
+- pnpm
+- pnpm-workspace
+- commitizen
+- eslint
+
 Prepare a framework (Frontend React/Vue; Backend: express/koa/any other framework with language that is commonly used for backend server) such that:
 
 - Create a websocket channel (preferably socketio) for backend to populate data to frontend;
