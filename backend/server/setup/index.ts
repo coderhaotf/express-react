@@ -32,7 +32,7 @@ const authenticate = () =>
 const sync = () =>
   sequelize.showAllSchemas({ logging: false }).then((tables) => {
     return sequelize
-      .sync()
+      .sync({ logging: false })
       .then(() => {
         console.log("Tables created successfully!");
       })

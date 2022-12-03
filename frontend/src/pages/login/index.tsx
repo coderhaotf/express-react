@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input, message, Space } from "antd";
 import styles from "./index.module.less";
 import { loginApi } from "../../services";
 import { useNavigate } from "react-router-dom";
+import { authContext } from "../../Auth";
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
   const [loading, setloading] = useState(false);
+  const auth = useContext(authContext);
 
   const onFinish = (values: { username: string; password: string }) => {
     setloading(true);
@@ -15,8 +17,14 @@ const Login: React.FC = () => {
       .then((data) => {
         if (data.success) {
           localStorage.setItem("auth_token", data.data.auth.token);
-          message.success(data.message || "登录成功!", 1, () => {
-            navigate("/", { replace: true });
+          message.success(data.message || "登录成功!", 2, () => {
+            if (auth.signin) {
+              auth.signin({ username: data.data.user.name }, () =>
+                navigate("/", { replace: true })
+              );
+            } else {
+              navigate("/", { replace: true });
+            }
           });
         } else {
           message.warning(data.message || "登录异常!");

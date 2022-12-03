@@ -24,5 +24,7 @@ export const generateAccessToken = (
   secretOrPrivateKey: Secret,
   options?: SignOptions
 ) => {
-  return jwt.sign(payload, secretOrPrivateKey, options);
+  return jwt.sign(payload, secretOrPrivateKey, {
+    ...options,
+  });
 };

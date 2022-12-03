@@ -43,8 +43,8 @@ let defaultConfig: AxiosRequestConfig = {
     const auth_token = localStorage.getItem("auth_token");
     if (auth_token) {
       headers.set("Authorization", `Bearer ${auth_token}`);
-      headers.setContentType("application/json");
     }
+    headers.setContentType("application/json");
     return JSON.stringify(data);
   },
 };

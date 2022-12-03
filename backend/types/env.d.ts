@@ -15,7 +15,7 @@ declare global {
         database?: string;
       };
       jwt_secret_key: string;
-      jwt_expired: number;
+      jwt_expired: string;
     }
   }
 }

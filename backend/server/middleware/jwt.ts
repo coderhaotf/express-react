@@ -113,8 +113,8 @@ export type Request<T = jwt.JwtPayload> = express.Request & { auth?: T };
  * @returns
  */
 export const jwtMiddlewareCreator = (options: Params) => {
-  if (!options?.secret)
-    throw new RangeError("express-jwt: `secret` is a required option");
+  // if (!options?.secret)
+  //   throw new RangeError("express-jwt: `secret` is a required option");
   if (!options.algorithms)
     throw new RangeError("express-jwt: `algorithms` is a required option");
   if (!Array.isArray(options.algorithms))
@@ -123,7 +123,7 @@ export const jwtMiddlewareCreator = (options: Params) => {
   const getSecretKey: GetSecretKey =
     typeof options.secret === "function"
       ? options.secret
-      : async () => options.secret as jwt.Secret;
+      : async () => process.env.jwt_secret_key as jwt.Secret;
 
   const credentialsRequired =
     typeof options.credentialsRequired === "undefined"
@@ -210,7 +210,7 @@ export const jwtMiddlewareCreator = (options: Params) => {
       const key = await getSecretKey(req, decodedToken);
 
       try {
-        jwt.verify(token, key, options);
+        jwt.verify(token, key);
       } catch (err) {
         throw new UnauthorizedError("invalid_token", (err as Error).message);
       }

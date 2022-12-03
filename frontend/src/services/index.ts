@@ -18,8 +18,22 @@ export const loginApi = (params: { username: string; password: string }) =>
  * @returns
  */
 export const registerApi = (params: { username: string; password: string }) =>
-  request<string>({
+  request<{ user: Record<string, any> }>({
     url: "/auth/register",
     method: "POST",
     data: params,
+  });
+
+/**
+ * 获取用户信息
+ * @param params
+ * @returns
+ */
+export const userApi = (username?: string) =>
+  request<{ user: Record<string, any> }>({
+    url: "/user/detail",
+    method: "GET",
+    params: {
+      username,
+    },
   });
