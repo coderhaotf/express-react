@@ -1,4 +1,4 @@
-import { orderModel } from "./order.model";
-import { userModel } from "./user.model";
+import { orderModel, OrderType } from "./order.model";
+import { userModel, UserType } from "./user.model";
 
-export { userModel, orderModel };
+export { userModel, orderModel, OrderType, UserType };

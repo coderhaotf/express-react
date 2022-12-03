@@ -16,6 +16,7 @@ declare global {
       };
       jwt_secret_key: string;
       jwt_expired: string;
+      logging?: boolean;
     }
   }
 }

@@ -7,13 +7,18 @@ enum Type {
   deleted = "deleted",
 }
 
-export const orderModel = sequelize.define<
-  Model<{ id: string; type: Type; price: number; num: number }>
->("order", {
+export interface OrderType {
+  id?: string;
+  type: Type;
+  price: number;
+  num: number;
+}
+
+export const orderModel = sequelize.define<Model<OrderType>>("order", {
   id: {
     allowNull: false,
     primaryKey: true,
-    type: DataTypes.UUID,
+    type: DataTypes.UUIDV4,
   },
   type: {
     allowNull: false,

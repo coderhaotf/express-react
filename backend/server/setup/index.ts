@@ -17,6 +17,7 @@ const sequelize = new Sequelize({
   host,
   port,
   protocol,
+  logging: !!(process.env.logging as any),
 });
 
 const authenticate = () =>

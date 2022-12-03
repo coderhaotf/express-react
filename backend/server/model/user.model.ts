@@ -1,9 +1,14 @@
 import { sequelize } from "../setup";
 import { DataTypes, Model } from "sequelize";
 
-export const userModel = sequelize.define<
-  Model<{ id?: string; name: string; password: string; age?: number }>
->("user", {
+export interface UserType {
+  id?: string;
+  name: string;
+  password: string;
+  age?: number;
+}
+
+export const userModel = sequelize.define<Model<UserType>>("user", {
   id: {
     allowNull: false,
     primaryKey: true,

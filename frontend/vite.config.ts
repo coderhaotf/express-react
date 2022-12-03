@@ -11,6 +11,10 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path,
       },
+      "/socket.io": {
+        target: "ws://localhost:9999",
+        ws: true,
+      },
     },
   },
 });

@@ -10,6 +10,7 @@ import { authenticate, sequelize, sync } from "./setup";
 import "./model";
 import { routes } from "./routes";
 import { createTerminus, HealthCheck } from "@godaddy/terminus";
+import { setupSocketIO } from "./socket";
 
 // 配置环境变量
 dotenv.config();
@@ -81,3 +82,6 @@ createTerminus(httpServer, {
   healthChecks: { "/healthcheck": onHealthCheck },
   onSignal,
 });
+
+// setup socket
+setupSocketIO({ httpServer });
