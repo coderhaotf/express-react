@@ -21,9 +21,9 @@ authRouter.post(
           const auth = {
             token: generateAccessToken(
               model.dataValues,
-              process.env.jwt_secret_key as string,
+              (process.env.jwt as any)?.secret_key as string,
               {
-                expiresIn: process.env.jwt_expired,
+                expiresIn: (process.env.jwt as any)?.expired,
               }
             ),
           };

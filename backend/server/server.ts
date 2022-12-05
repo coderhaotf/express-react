@@ -1,9 +1,9 @@
+import "./environment.ts";
 import cors from "cors";
 import express from "express";
 import session from "express-session";
 import http from "http";
 import compression from "compression";
-import dotenv from "dotenv";
 import path from "path";
 import { authenticate, sequelize, sync } from "./setup";
 // 注册业务表, 全局导入
@@ -11,9 +11,6 @@ import "./model";
 import { routes } from "./routes";
 import { createTerminus, HealthCheck } from "@godaddy/terminus";
 import { setupSocketIO } from "./socket";
-
-// 配置环境变量
-dotenv.config();
 
 const dev = process.env.NODE_ENV !== "production";
 const port = process.env.PORT || 9090;

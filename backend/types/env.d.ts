@@ -14,8 +14,10 @@ declare global {
         protocol?: string;
         database?: string;
       };
-      jwt_secret_key: string;
-      jwt_expired: string;
+      jwt?: {
+        secret_key?: string;
+        expired?: string;
+      };
       logging?: boolean;
     }
   }

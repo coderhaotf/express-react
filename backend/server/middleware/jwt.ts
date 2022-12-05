@@ -123,7 +123,7 @@ export const jwtMiddlewareCreator = (options: Params) => {
   const getSecretKey: GetSecretKey =
     typeof options.secret === "function"
       ? options.secret
-      : async () => process.env.jwt_secret_key as jwt.Secret;
+      : async () => (process.env.jwt as any)?.secret_key as jwt.Secret;
 
   const credentialsRequired =
     typeof options.credentialsRequired === "undefined"
