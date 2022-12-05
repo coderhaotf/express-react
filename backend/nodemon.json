@@ -1,0 +1,20 @@
+{
+    "verbose": true,
+    "restartable": "rs",
+    "ignore": [
+        "*.test.js",
+        "**/fixtures/**",
+        ".git",
+        "node_modules/**/node_modules"
+    ],
+    "watch": [
+        "env.yaml"
+    ],
+    "options": {
+        "extensions": [
+            "ts",
+            "yaml"
+        ],
+        "exec": "node"
+    }
+}

@@ -22,6 +22,7 @@ pnpm install
 ### fontend
 
 - react
+- react-router-dom
 - antd
 - react-redux
 - @reduxjs/toolkit
@@ -36,6 +37,8 @@ pnpm install
 
 - pnpm
 - pnpm-workspace
+- nodemon
+- yaml
 - commitizen
 - eslint
 
