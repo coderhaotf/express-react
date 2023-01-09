@@ -1,6 +1,11 @@
 import express, { NextFunction, Request, Response } from "express";
 import { userModel } from "../model";
-import { ResponseGenerator, generateAccessToken } from "../utils";
+import {
+  ResponseGenerator,
+  generateAccessToken,
+  decode,
+  encode,
+} from "../utils";
 
 const authRouter = express.Router();
 
@@ -15,9 +20,15 @@ authRouter.post(
       const data = req.body;
       if (data && data.username && data.password) {
         const model = await userModel.findOne({
-          where: { name: data.username, password: data.password },
+          where: { name: data.username },
         });
         if (model) {
+          const validated = decode(data.password, model.dataValues.password);
+          if (!validated) {
+            return res.json(
+              ResponseGenerator.fail({ message: "账号密码错误, 请重试!" })
+            );
+          }
           const auth = {
             token: generateAccessToken(
               model.dataValues,
@@ -69,7 +80,7 @@ authRouter.post(
         } else {
           const newUser = await userModel.create({
             name: data.username,
-            password: data.password,
+            password: encode(data.password),
           });
           res.json(
             ResponseGenerator.success({ data: newUser, message: "注册成功!" })

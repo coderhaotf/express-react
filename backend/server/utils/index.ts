@@ -1,4 +1,5 @@
 import jwt, { Secret, SignOptions } from "jsonwebtoken";
+import bcrypt from "bcrypt";
 
 /**
  * ResponseGenerator
@@ -27,4 +28,26 @@ export const generateAccessToken = (
   return jwt.sign(payload, secretOrPrivateKey, {
     ...options,
   });
+};
+
+/**
+ *
+ * @param data
+ * @param saltRounds
+ * @returns
+ */
+export const encode = (data: string | Buffer, saltRounds = 10) => {
+  const salt = bcrypt.genSaltSync(saltRounds);
+  const hash = bcrypt.hashSync(data, salt);
+  return hash;
+};
+
+/**
+ *
+ * @param data
+ * @param encrypted
+ * @returns
+ */
+export const decode = (data: string | Buffer, encrypted: string) => {
+  return bcrypt.compareSync(data, encrypted);
 };
